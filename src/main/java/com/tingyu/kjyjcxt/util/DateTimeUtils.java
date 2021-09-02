@@ -59,14 +59,12 @@ public class DateTimeUtils {
                 }
             }
         } else {
-            //qishinian
+            //
             for (int j = beginYear; j <= endYear; j++) {
-
                 if (j == beginYear) {
                     retList.addAll(buildOfYear(j, beginMonth, beginDay, 1));
                 } else if (j < endYear) {
                     retList.addAll(buildOfYear(j, -1, -1, 2));
-
                 } else {
                     retList.addAll(buildOfYear(j, endMonth, endDay, 3));
                 }
@@ -77,7 +75,6 @@ public class DateTimeUtils {
 
 
     //begin year - the day end of year
-
     public static List<String> buildOfYear(int year, int month, int day, int type) {
         List<String> result = new ArrayList<>();
         if (type == 1) {
@@ -126,7 +123,6 @@ public class DateTimeUtils {
      */
     public static List<String> buildOfDay(int year, int month, int day, int type) {
         List<String> result = new ArrayList<>();
-
         int start = 0;
         int end = 0;
         switch (type) {

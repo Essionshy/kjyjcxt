@@ -20,20 +20,15 @@ import java.lang.reflect.Method;
 @Aspect
 public class ValidatorAspect {
 
-
     @Pointcut(value = "@annotation(com.tingyu.kjyjcxt.annotation.ValidatorHandler)")
     public void pointcut() {
     }
 
     @Around(value = "pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) {
-
         Object obj = null;
-
-
         try {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-
             Method method = joinPoint.getTarget().getClass().getMethod(signature.getName(),signature.getMethod().getParameterTypes());
             //获取方法的注解
             ValidatorHandler validatorHandler = method.getAnnotation(ValidatorHandler.class);
@@ -43,13 +38,8 @@ public class ValidatorAspect {
                 AbstractValidator abstractValidator = validators.newInstance();
                 //获取方法参数
                 Object[] args = joinPoint.getArgs();
-
                 abstractValidator.validate(args[0]);
-
-
-
             }
-
             //前置通知
             obj = joinPoint.proceed();
             //后置通知
@@ -57,8 +47,6 @@ public class ValidatorAspect {
             throwable.printStackTrace();
             //异常通知
         }
-
-
         return obj;
     }
 
