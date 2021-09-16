@@ -12,7 +12,6 @@ public final class StringUtils {
         StringBuilder sb = new StringBuilder();
         sb.append(str1).append(connector).append(str2);
         return sb.toString();
-
     }
 
 }

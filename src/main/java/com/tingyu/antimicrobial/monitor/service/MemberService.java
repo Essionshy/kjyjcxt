@@ -2,7 +2,7 @@ package com.tingyu.antimicrobial.monitor.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tingyu.antimicrobial.monitor.dto.MemberDTO;
-import com.tingyu.antimicrobial.monitor.entity.MemberEntity;
+import com.tingyu.antimicrobial.monitor.entity.PatientEntity;
 
 /**
  * @Author essionshy
@@ -10,6 +10,6 @@ import com.tingyu.antimicrobial.monitor.entity.MemberEntity;
  * @Version kjyjcxt
  */
 
-public interface MemberService extends IService<MemberEntity> {
+public interface MemberService extends IService<PatientEntity> {
     void insert(MemberDTO dto) throws Exception;
 }

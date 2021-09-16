@@ -1,6 +1,6 @@
 package com.tingyu.antimicrobial.monitor.validator;
 
-import com.tingyu.antimicrobial.monitor.entity.MemberEntity;
+import com.tingyu.antimicrobial.monitor.entity.PatientEntity;
 
 /**
  * @Author essionshy
@@ -16,8 +16,8 @@ public class MemberValidator extends AbstractValidator {
     @Override
     protected void validateInternal(Object obj) {
 
-        if (obj instanceof MemberEntity) {
-            MemberEntity memberEntity = (MemberEntity) obj;
+        if (obj instanceof PatientEntity) {
+            PatientEntity memberEntity = (PatientEntity) obj;
             //校验年龄
             if (memberEntity.getAge() <= MIN_AGE || memberEntity.getAge()>=MAX_AGE){
                 System.out.println("年龄不符合要求");

@@ -4,6 +4,7 @@ import com.tingyu.antimicrobial.monitor.dto.MemberDTO;
 import com.tingyu.antimicrobial.monitor.service.MemberService;
 import com.tingyu.antimicrobial.monitor.task.TotalTask;
 import com.tingyu.antimicrobial.monitor.common.PublicResult;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,7 +18,7 @@ import java.util.concurrent.ForkJoinTask;
  */
 @RestController
 @RequestMapping("/member")
-public class MemberController {
+public class PatientController {
 
     @Resource
     private MemberService memberService;
@@ -31,16 +32,13 @@ public class MemberController {
         }
     }
 
-
+    @ApiOperation("query patient info by id")
     @GetMapping("get/{id}")
     public PublicResult get(@PathVariable("id") String id) throws Exception {
-
         ForkJoinPool threadPool=new ForkJoinPool();
         TotalTask totalTask = new TotalTask(1, 100);
         ForkJoinTask<Integer> task = threadPool.submit(totalTask);
         System.out.println(task.get());
-
-
         return PublicResult.success();
     }
 

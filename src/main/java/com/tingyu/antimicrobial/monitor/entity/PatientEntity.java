@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("tb_member")
-public class MemberEntity {
+public class PatientEntity {
     private String id;
     private String name;
     private int age;

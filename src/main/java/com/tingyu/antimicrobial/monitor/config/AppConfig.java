@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
  * @Version kjyjcxt
  */
 //@RefreshScope
-@MapperScan(basePackages = {"com.tingyu.kjyjcxt.dao"})
-@ComponentScan(basePackages = {"com.tingyu.kjyjcxt.config"})
+@MapperScan(basePackages = {"com.tingyu.antimicrobial.monitor.dao"})
+@ComponentScan(basePackages = {"com.tingyu.antimicrobial.monitor.config"})
 @Configuration
 public class AppConfig {
 }

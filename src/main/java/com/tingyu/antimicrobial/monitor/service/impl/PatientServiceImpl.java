@@ -2,9 +2,9 @@ package com.tingyu.antimicrobial.monitor.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tingyu.antimicrobial.monitor.service.MemberService;
-import com.tingyu.antimicrobial.monitor.dao.MemberMapper;
+import com.tingyu.antimicrobial.monitor.dao.PatientMapper;
 import com.tingyu.antimicrobial.monitor.dto.MemberDTO;
-import com.tingyu.antimicrobial.monitor.entity.MemberEntity;
+import com.tingyu.antimicrobial.monitor.entity.PatientEntity;
 import com.tingyu.antimicrobial.monitor.service.LogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -22,10 +22,10 @@ import java.util.concurrent.CompletableFuture;
  */
 @Service
 @Slf4j
-public class MemberServiceImpl extends ServiceImpl<MemberMapper, MemberEntity> implements MemberService {
+public class PatientServiceImpl extends ServiceImpl<PatientMapper, PatientEntity> implements MemberService {
 
     @Resource
-    private MemberMapper memberMapper;
+    private PatientMapper memberMapper;
 
     @Resource
     private LogService logService;
@@ -71,7 +71,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, MemberEntity> i
         if (dto == null) {
             return;
         }
-        MemberEntity entity = new MemberEntity();
+        PatientEntity entity = new PatientEntity();
         BeanUtils.copyProperties(dto, entity);
         boolean success = this.save(entity);
         if (success) {
