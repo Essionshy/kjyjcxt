@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
  * @Version kjyjcxt
  */
 @Configuration
-public class RedisCacheConfiguration {
+public class CacheConfiguration {
+
 
 
 

@@ -48,6 +48,7 @@ public class LogAspect {
         try {
             return joinPoint.proceed();
         } catch (Exception e) {
+            e.printStackTrace();
             log.error("system error:{}", e.getMessage());
         } finally {
             long end = System.currentTimeMillis();

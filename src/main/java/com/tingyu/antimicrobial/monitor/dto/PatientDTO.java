@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * @Author essionshy
  * @Create 2021/6/1 22:10
@@ -17,9 +19,17 @@ import lombok.experimental.Accessors;
 @Data
 @ToString
 @Accessors(chain = true)
-public class MemberDTO {
-    private String id;
+public class PatientDTO implements Serializable {
+
+    private String globalId;
+
     private String name;
+
     private Integer age;
+
+
+    private String identityCard;
+
+
 
 }

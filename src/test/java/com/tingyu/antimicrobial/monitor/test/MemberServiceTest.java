@@ -1,7 +1,7 @@
 package com.tingyu.antimicrobial.monitor.test;
 
-import com.tingyu.antimicrobial.monitor.service.MemberService;
-import com.tingyu.antimicrobial.monitor.dto.MemberDTO;
+import com.tingyu.antimicrobial.monitor.service.PatientService;
+import com.tingyu.antimicrobial.monitor.dto.PatientDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ import java.util.concurrent.*;
 public class MemberServiceTest {
 
     @Autowired
-    private MemberService memberService;
+    private PatientService memberService;
 
     @Test
     public void testCreate() throws Exception {
-        MemberDTO member = new MemberDTO();
-        member.setId("200002");
+        PatientDTO member = new PatientDTO();
+        member.setGlobalId("200002");
         member.setAge(10);
         member.setName("张三");
         memberService.insert(member);

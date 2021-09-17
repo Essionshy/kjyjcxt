@@ -19,9 +19,9 @@ public class MemberValidator extends AbstractValidator {
         if (obj instanceof PatientEntity) {
             PatientEntity memberEntity = (PatientEntity) obj;
             //校验年龄
-            if (memberEntity.getAge() <= MIN_AGE || memberEntity.getAge()>=MAX_AGE){
+       /*     if (memberEntity.getAge() <= MIN_AGE || memberEntity.getAge()>=MAX_AGE){
                 System.out.println("年龄不符合要求");
-            }
+            }*/
 
         }
 

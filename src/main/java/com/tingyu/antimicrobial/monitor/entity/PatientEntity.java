@@ -1,6 +1,8 @@
 package com.tingyu.antimicrobial.monitor.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +15,24 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("tb_member")
+@TableName("tb_patient")
 public class PatientEntity {
-    private String id;
+
+    @ApiModelProperty("global id")
+    @TableField("global_id")
+    private String globalId;
+    @ApiModelProperty("name")
+
+    @TableField("name")
     private String name;
-    private int age;
+
+    @TableField("country")
+    private String country;
+
+    private String nation;
+
+    private String marriage;
+
+    @TableField("identity_card")
+    private String identityCard;
 }

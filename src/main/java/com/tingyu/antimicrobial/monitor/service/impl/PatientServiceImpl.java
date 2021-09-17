@@ -1,19 +1,25 @@
 package com.tingyu.antimicrobial.monitor.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.tingyu.antimicrobial.monitor.service.MemberService;
 import com.tingyu.antimicrobial.monitor.dao.PatientMapper;
-import com.tingyu.antimicrobial.monitor.dto.MemberDTO;
+import com.tingyu.antimicrobial.monitor.dto.PatientDTO;
 import com.tingyu.antimicrobial.monitor.entity.PatientEntity;
 import com.tingyu.antimicrobial.monitor.service.LogService;
+import com.tingyu.antimicrobial.monitor.service.PatientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 /**
  * @Author essionshy
@@ -22,7 +28,7 @@ import java.util.concurrent.CompletableFuture;
  */
 @Service
 @Slf4j
-public class PatientServiceImpl extends ServiceImpl<PatientMapper, PatientEntity> implements MemberService {
+public class PatientServiceImpl extends ServiceImpl<PatientMapper, PatientEntity> implements PatientService {
 
     @Resource
     private PatientMapper memberMapper;
@@ -33,15 +39,12 @@ public class PatientServiceImpl extends ServiceImpl<PatientMapper, PatientEntity
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void insert(MemberDTO dto) throws Exception {
+    public void insert(PatientDTO dto) throws Exception {
 
         //保存会员基本信息
 
         long startTime = System.currentTimeMillis();
 
-        CompletableFuture.runAsync(() -> {
-            saveMemberInfo(dto);
-        });
 
 
         //保存操作日志, 如果出现异常，当前方法不捕获异常，则会导致回滚
@@ -63,25 +66,28 @@ public class PatientServiceImpl extends ServiceImpl<PatientMapper, PatientEntity
 
         long endTime = System.currentTimeMillis();
 
-        log.info("执行耗时：{}", endTime - startTime);
+        log.info("执行耗时：{}", endTime- startTime);
 
     }
 
-    private void saveMemberInfo(MemberDTO dto) {
-        if (dto == null) {
-            return;
-        }
-        PatientEntity entity = new PatientEntity();
-        BeanUtils.copyProperties(dto, entity);
-        boolean success = this.save(entity);
-        if (success) {
-            log.info("保存会员信息成功,memberId:" + dto.getId());
-        } else {
-            log.info("保存会员信息失败,memberId:" + dto.getId());
-
-        }
-
+    @Cacheable(cacheNames = {"patient"},key = "#root.methodName")
+    @Override
+    public List<PatientDTO> listAll() {
+        List<PatientEntity> entityList = this.list();
+        return CollectionUtil.isEmpty(entityList) ? Collections.EMPTY_LIST : entityList.stream().map(entity -> convert(entity)).collect(Collectors.toList());
     }
+
+
+    private PatientDTO convert(PatientEntity entity) {
+        PatientDTO patientDTO = new PatientDTO();
+        if (ObjectUtil.isNotNull(entity)) {
+            BeanUtils.copyProperties(entity, patientDTO);
+        }
+        return patientDTO;
+    }
+
+
+
 
 
 }

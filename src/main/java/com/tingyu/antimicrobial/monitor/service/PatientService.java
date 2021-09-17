@@ -1,8 +1,10 @@
 package com.tingyu.antimicrobial.monitor.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tingyu.antimicrobial.monitor.dto.MemberDTO;
+import com.tingyu.antimicrobial.monitor.dto.PatientDTO;
 import com.tingyu.antimicrobial.monitor.entity.PatientEntity;
+
+import java.util.List;
 
 /**
  * @Author essionshy
@@ -10,6 +12,8 @@ import com.tingyu.antimicrobial.monitor.entity.PatientEntity;
  * @Version kjyjcxt
  */
 
-public interface MemberService extends IService<PatientEntity> {
-    void insert(MemberDTO dto) throws Exception;
+public interface PatientService extends IService<PatientEntity> {
+    void insert(PatientDTO dto) throws Exception;
+
+    List<PatientDTO> listAll();
 }

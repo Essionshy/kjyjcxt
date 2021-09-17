@@ -1,9 +1,9 @@
 package com.tingyu.antimicrobial.monitor.controller;
 
-import com.tingyu.antimicrobial.monitor.dto.MemberDTO;
-import com.tingyu.antimicrobial.monitor.service.MemberService;
-import com.tingyu.antimicrobial.monitor.task.TotalTask;
 import com.tingyu.antimicrobial.monitor.common.PublicResult;
+import com.tingyu.antimicrobial.monitor.dto.PatientDTO;
+import com.tingyu.antimicrobial.monitor.service.PatientService;
+import com.tingyu.antimicrobial.monitor.task.TotalTask;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +17,23 @@ import java.util.concurrent.ForkJoinTask;
  * @Version kjyjcxt
  */
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/patient")
 public class PatientController {
 
     @Resource
-    private MemberService memberService;
+    private PatientService patientService;
+
+    @ApiOperation("query patient all item")
+    @GetMapping("/list")
+    public PublicResult listAll(){
+        return PublicResult.buildQuerySuccess(patientService.listAll());
+    }
+
 
     @PostMapping("save")
-    public void save(@RequestBody MemberDTO dto){
+    public void save(@RequestBody PatientDTO dto) {
         try {
-            memberService.insert(dto);
+            patientService.insert(dto);
         } catch (Exception e) {
             e.printStackTrace();
         }
